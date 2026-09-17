@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#01040c" />
+    <title>Auth Flow Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;1,600;1,700&amp;family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="site-shell">
+      <div class="demo-viewport" id="demo-viewport" data-size="desktop">
+        <span class="viewport-label" id="viewport-label" aria-hidden="true"></span>
+        <section class="stage" id="stage" aria-label="Authentication prototype">
+          <section class="auth-modal" id="auth-modal" aria-labelledby="screen-title" aria-modal="true" role="dialog">
+            <button class="close-button" id="close-button" type="button" aria-label="Close dialog"></button>
+            <div class="modal-content" id="modal-content">
+              <h1 id="screen-title" tabindex="-1">Log in</h1>
+              <p class="screen-copy" id="screen-copy"></p>
+              <div class="status-block" id="status-block" hidden></div>
+
+              <form id="auth-form" novalidate>
+                <fieldset class="form-fieldset" id="form-fieldset">
+                  <legend class="visually-hidden">Account details</legend>
+                  <div class="form-fields" id="form-fields"></div>
+
+                  <div class="form-extras" id="form-extras" hidden>
+                    <label class="remember" for="remember-me">
+                      <input type="checkbox" id="remember-me" name="remember" />
+                      <span class="remember-box" aria-hidden="true"></span>
+                      <span>Remember me</span>
+                    </label>
+                  </div>
+
+                  <p class="form-alert" id="form-alert" role="alert" hidden></p>
+
+                  <button class="primary-button" id="submit-button" type="submit">
+                    <span class="btn-fx" aria-hidden="true"><span class="btn-sheen"></span></span>
+                    <span class="button-label" id="submit-label">LOG IN</span>
+                    <span class="spinner" aria-hidden="true"></span>
+                  </button>
+                </fieldset>
+              </form>
+
+              <div class="social-login" id="social-login" hidden>
+                <p class="social-divider"><span>OR CONTINUE WITH</span></p>
+                <div class="social-row">
+                  <button type="button" class="social-button" data-provider="Google">GOOGLE</button>
+                  <button type="button" class="social-button" data-provider="Apple">APPLE</button>
+                  <button type="button" class="social-button" data-provider="Facebook">FACEBOOK</button>
+                </div>
+              </div>
+
+              <div class="footer-actions" id="footer-actions"></div>
+            </div>
+          </section>
+
+          <button class="reopen-button" id="reopen-button" type="button" hidden>Open log in</button>
+        </section>
+      </div>
+
+      <button class="showcase-trigger" id="showcase-trigger" type="button" aria-expanded="false" aria-controls="showcase-panel">
+        <span class="trigger-dot" aria-hidden="true"></span>
+        Reviewer controls
+        <kbd>`</kbd>
+      </button>
+    </main>
+
+    <aside class="showcase-panel" id="showcase-panel" aria-label="Reviewer controls" aria-hidden="true">
+      <div class="showcase-heading">
+        <div>
+          <span class="eyebrow">AUTHENTICATION FLOW</span>
+          <h2>Review every state</h2>
+        </div>
+        <button class="panel-close" id="panel-close" type="button" aria-label="Close reviewer controls">×</button>
+      </div>
+      <p class="showcase-copy">Jump to any screen, force a state on it, or preview another device width. Everything here drives the same state store the form uses.</p>
+
+      <section class="showcase-group">
+        <h3 class="group-label">Screens</h3>
+        <div class="screen-grid" id="screen-grid"></div>
+      </section>
+
+      <section class="showcase-group">
+        <div class="group-row">
+          <h3 class="group-label"><label for="preset-screen">States for</label></h3>
+          <select id="preset-screen" class="preset-select"></select>
+        </div>
+        <div class="preset-grid" id="preset-grid"></div>
+        <p class="hold-banner" id="hold-banner" hidden>Loading is held so you can inspect it. <button type="button" data-action="resolve">Finish request</button></p>
+      </section>
+
+      <section class="showcase-group">
+        <h3 class="group-label">Preview width</h3>
+        <div class="viewport-actions" role="group" aria-label="Preview width">
+          <button type="button" data-viewport="desktop">Desktop</button>
+          <button type="button" data-viewport="tablet">Tablet 768</button>
+          <button type="button" data-viewport="mobile">Mobile 375</button>
+        </div>
+      </section>
+
+      <section class="showcase-group">
+        <h3 class="group-label">Try the real flow</h3>
+        <dl class="demo-data">
+          <div><dt>Log in</dt><dd>any valid e-mail or username + a password like <code>Copper2026</code></dd></div>
+          <div><dt>Wrong password</dt><dd><code>Wrongpass1</code> — three tries freeze the account</dd></div>
+          <div><dt>Remember me</dt><dd>tick it, log in, then log out to reach <em>Welcome back</em></dd></div>
+        </dl>
+      </section>
+
+      <details class="showcase-group inspector">
+        <summary class="group-label">Live state</summary>
+        <pre id="state-inspector"></pre>
+      </details>
+
+      <section class="showcase-group">
+        <button type="button" class="tests-button" id="run-tests">Run state-logic checks</button>
+        <div class="test-results" id="test-results" hidden></div>
+      </section>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
